@@ -1,0 +1,274 @@
+#Basic Scene file - defines materials/lights/objects
+
+#define lights
+Light {
+	col .30 0.0 .70
+	pos -1 1 0
+	type dir
+}
+	
+Light {
+	col .30 .60 .0
+	pos 0 -.75 1
+	type point
+}
+
+Light {
+	col .50 .50 .50
+	pos 1 1.5 -1
+	type dir
+	}
+
+#define Cam positions
+Projection 0 {
+	typ p
+	fov 35
+	zne 0.1
+	zfa 100
+	asp 1
+	eye 0 0 5
+	at 0 0 0
+	up 0 1 0
+}
+
+#define shapes and materials they have
+#define Floor
+Object {
+	nam Floor
+	obj tilefloor.obj
+	tex ktiles.bmp
+	bump ktilesnorm.bmp
+	amb 0.2 0.2 0.2
+	dif 1.0 1.0 .1
+	spe 1.0 1.0 1.0
+}
+
+Object {
+	nam Ringtoy
+	obj toy.obj
+	tex ringtoy.bmp
+	amb 0.2 0.2 0.2
+	dif 1.0 1.0 .1
+	spe 1.0 1.0 1.0
+}
+
+Object {
+	nam Heli
+	obj heli.obj
+	tex heli.bmp
+	amb 0.1 0.1 0.1
+	dif 0.8 0.8 0.8
+	spec 0.2 0.2 0.2
+}
+
+Object {
+	nam Ball
+	obj sphere.obj
+	tex star.bmp
+	amb 0.3 0.4 0.3
+	dif 0.2 0.2 0.3
+	spec 0.3 0.3 0.4
+}
+
+Object {
+	nam Wall
+	obj wall.obj
+	tex wall.bmp
+	amb 0.2 0.2 0.2
+	dif 0.1 0.1 0.1
+	spec 0.6 0.6 0.6
+}
+
+Object {
+	nam bWall
+	obj wall.obj
+	tex backwall.bmp
+	amb 0.2 0.2 0.2
+	dif 0.1 0.1 0.1
+	spec 0.6 0.6 0.6
+}
+
+Object {
+	nam Window
+	obj window.obj
+	tex window.bmp
+	amb 0.3 0.3 0.3
+	dif 0.4 0.4 0.4
+	spec 0.1 0.1 0.1
+}
+
+Object {
+	nam Horse
+	obj horse.obj
+	tex horse.bmp
+	amb 0.3 0.3 0.3
+	dif 0.2 0.2 0.2
+	spec 0.1 0.1 0.1
+}
+
+Object {
+	nam Ceiling
+	obj Ceiling.obj
+	tex ceiling.bmp
+	amb 0.3 0.3 0.3
+	dif 0.2 0.2 0.2
+	spec 0.2 0.2 0.2
+}
+
+Object {
+	nam Clouds
+	obj Wall.obj
+	tex clouds.bmp
+	amb .05 .05 .05
+	dif 0.0 0.0 0.0
+	spec 0.0 0.0 0.0
+}
+
+Object {
+	nam Windowpane
+	obj Wall.obj
+	tex windowpane.bmp
+	amb 0.1 0.1 0.1
+	diff 0.1 0.1 0.1
+	spec 0.1 0.1 0.1
+}
+
+#define nodes - must start with parent
+Node 0 {
+	typ Ringtoy
+	pos 0 -1.25 -3.2
+	scl 1 1 1
+	par -1
+}
+
+Node 1 {
+	typ Floor
+	pos 0 0 1.2
+	scl 2 6 3
+	par 0
+}
+
+Node 2 {
+	typ Heli
+	pos .5  1 0
+	scl .3 .3 0.3
+	rots 0 23 35
+	rot y
+	par 0
+}
+
+Node 3 {
+	typ Heli
+	pos -.5 0 1
+	scl .75 .75 .75
+	rots 0 0 35
+	rot y
+	par 2
+}
+
+Node 4 {
+	typ Ball
+	pos -1 1.22 3
+	scl .2 .2 .2
+	path y -1
+	par 0
+}
+
+//left wall
+Node 5 {
+	typ Wall
+	pos -1.2 1 -1.95
+	scl 3.0 1 1
+	rots 0 90 0
+	par 0
+}
+
+//left wall
+Node 5 {
+	typ Wall
+	pos -1.2 1.2 -1.95
+	scl 3.0 1.2 1
+	rots 0 90 0
+	par 0
+}
+
+//right wall
+Node 6 {
+	typ Wall
+	pos 1.2 1.2 -1.95
+	scl 3.0 1.2 1
+	rots 0 270 0 
+	par 0
+}
+
+//rocking horse
+Node 7 {
+	typ Horse 
+	pos 1.3 0 -1.40
+	scl 1 1 1
+	rots 0 245 0 
+	par 0
+}
+
+//Ceiling
+Node 8 {
+	typ Ceiling
+	pos 0 2.40 1.2
+	scl 2 6 3
+	par 0
+}
+
+//Pieces of the back Wall - Then one huge piece for the scene behind the window
+#left piece
+Node 9 {
+	typ bWall
+	pos -1.2 1.2 -1.75
+	scl .8 1.2 1
+	par 0
+}
+
+#right piece
+Node 9 {
+	typ bWall
+	pos 1.2 1.2 -1.75
+	scl .8 1.20 1
+	par 0
+}
+
+#Bottom and top 
+Node 10 {
+	typ bWall
+	pos 0 2.15 -1.75
+	scl .4 .3 1
+	par 0
+}
+
+Node 11 {
+	typ bWall
+	pos 0 .15 -1.75
+	scl .4 .3 1
+	par 0
+}
+
+Node 12 {
+	typ Clouds
+	pos 0 1.2 -2.3
+	scl 2 .7 1
+	par 0
+}
+
+Node 13 {
+	typ Window
+	pos -1.70 .92 0
+	scl 1.90 2.70 2.25
+	rots 0 270 0
+	par 0
+}
+
+Node 14 {
+	typ Windowpane
+	pos 0 .90 -1.70
+	scl .42 .42 .35
+	par 0
+	blend .4
+}
